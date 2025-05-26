@@ -8,6 +8,7 @@ import RecommendationsPanel from "@/components/recommendations-panel";
 import { Cloud, Sparkles, ArrowRight, RefreshCw } from "lucide-react";
 
 interface DiagramData {
+  data: string; // raw D2 code string
   nodes: Node[];
   edges: Edge[];
   vpcs?: Array<{
@@ -53,7 +54,7 @@ export default function Home() {
       const result = await response.json();
 
       if (result.success && result.data) {
-        setDiagramData({ data: result.data });
+        setDiagramData({ data: result.data, nodes: [], edges: [] });
         setCurrentStep("diagram");
       } else {
         throw new Error("Invalid response format");
